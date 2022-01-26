@@ -1,12 +1,10 @@
 #!/bin/sh
-bat0_energy_now=$(cat /sys/class/power_supply/BAT0/energy_now)
-bat1_energy_now=$(cat /sys/class/power_supply/BAT1/energy_now)
 
-bat0_energy_full=$(cat /sys/class/power_supply/BAT0/energy_full)
-bat1_energy_full=$(cat /sys/class/power_supply/BAT1/energy_full)
-
-total_energy_now=$(($bat0_energy_now+$bat1_energy_now))
-total_energy_full=$(($bat0_energy_full+$bat1_energy_full))
+for bat in $(ls /sys/class/power_supply | grep BAT)
+do
+	total_energy_now=$((total_energy_now+$(cat /sys/class/power_supply/$bat/energy_now)))
+	total_energy_full=$((total_energy_full+$(cat /sys/class/power_supply/$bat/energy_full)))
+done
 
 battery_level=$(printf "%.0f" $(echo "($total_energy_now / $total_energy_full) * 100" | bc -l))
 
