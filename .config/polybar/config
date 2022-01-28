@@ -2,6 +2,8 @@
 workspace-padding = 2
 
 [colors]
+foreground = #ffffff
+foreground-alt = #999999
 background = #262626
 background-alt = #3d3d3d
 alert = #f7a902
@@ -22,10 +24,9 @@ tray-padding = 2
 font-0 = Fira Mono:pixelsize=11;2
 font-1 = Fira Mono:pixelsize=11:weight=bold;2
 font-2 = Material Design Icons Desktop;2
-;font-1 = Siji;1
 
+foreground = ${colors.foreground}
 background = ${colors.background}
-;foreground = ${colors.fg}
 
 override-redirect = true
 wm-restack = i3
@@ -34,6 +35,7 @@ wm-restack = i3
 type = custom/menu
 
 format-spacing = 1
+format-foreground = ${colors.foreground}
 
 label-open = 󰤆
 label-close = 󰅖
@@ -50,11 +52,11 @@ type = internal/pulseaudio
 
 format-volume-padding = 1
 format-volume = <ramp-volume>
+format-volume-foreground = ${colors.foreground}
+
 format-muted-padding = 1
 format-muted = 󰝟
-
-; label-muted = 󰝟
-; label-muted-padding = 1
+format-muted-foreground = ${colors.foreground-alt}
 
 ramp-volume-0 = 󰕿
 ramp-volume-1 = 󰖀
@@ -65,6 +67,7 @@ type = custom/script
 exec = $HOME/.config/polybar/battery.sh
 interval = 1
 format-padding = 0
+format-foreground = ${colors.foreground}
 
 [module/wlan]
 type = internal/network
@@ -73,21 +76,17 @@ interval = 3.0
 
 format-connected-padding = 1
 format-connected = <ramp-signal> <label-connected>
-; format-connected-underline = #9f78e1
+format-connected-foreground = ${colors.foreground}
 label-connected = %essid%
 
 format-disconnected-padding = 1
 format-disconnected = 󰤮
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
+format-disconnected-foreground = ${colors.foreground-alt}
 
 ramp-signal-0 = 󰤟
 ramp-signal-1 = 󰤢
 ramp-signal-2 = 󰤥
 ramp-signal-3 = 󰤨
-;ramp-signal-foreground = ${colors.foreground-alt}
 
 [module/eth]
 type = internal/network
@@ -96,13 +95,17 @@ interval = 3.0
 
 label-connected-padding = 0
 label-connected = 󰈁%local_ip%
+label-connected-foreground = ${colors.foreground}
+
 label-disconnected =
+label-disconnected-foreground = ${colors.foreground-alt}
 
 [module/date]
 type = internal/date 
 time = "%I:%M %p"
 date = "%a %d %b"
 label = 󰃭 %date% - 󱑍 %time%
+label-foreground = ${colors.foreground}
 
 [module/i3]
 type = internal/i3
@@ -111,16 +114,19 @@ index-sort = true
 
 ; label focused
 label-focused = %index%
+label-focused-foreground = ${colors.foreground}
 label-focused-background = ${colors.background-alt}
 label-focused-padding = ${config.workspace-padding}
 
 ; label unfocused
 label-unfocused = %index%
+label-unfocused-foreground = ${colors.foreground}
 label-unfocused-background = ${colors.background}
 label-unfocused-padding = ${config.workspace-padding}
 
 ; label urgent
 label-urgent = %index%
+label-urgent-foreground = ${colors.foreground}
 label-urgent-background = ${colors.alert}
 label-urgent-padding = ${config.workspace-padding}
 
