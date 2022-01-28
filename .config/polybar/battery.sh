@@ -1,6 +1,14 @@
-#!/bin/sh
+#!/bin/bash
 
-for bat in $(ls /sys/class/power_supply | grep BAT)
+batteries=$(ls /sys/class/power_supply | grep BAT)
+
+if [ $? -eq 1 ]
+then
+	echo -e "󰚥"
+	exit 0
+fi
+
+for bat in $batteries
 do
 	total_energy_now=$((total_energy_now+$(cat /sys/class/power_supply/$bat/energy_now)))
 	total_energy_full=$((total_energy_full+$(cat /sys/class/power_supply/$bat/energy_full)))
